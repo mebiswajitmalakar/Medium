@@ -1,19 +1,15 @@
 import { Hono } from 'hono'
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
+import auth from "./routes/auth"
 
 type Bindings = {
   DATABASE_URL: string
+  JWT_secret: string
+  JWT_algorithm: string
 }
 const app = new Hono<{
   Bindings: Bindings
 }>()
 
-// TODO: place this somewhere appropriate
-const prisma = new PrismaClient().$extends(withAccelerate())
-
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.route("/auth", auth)
 
 export default app
