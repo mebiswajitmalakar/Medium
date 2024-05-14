@@ -28,4 +28,4 @@
 - **Git** for version control
 
 ## Online repository
-- **Github** as online code repositoryYour platform for sharing and discovering insightful blogs on diverse topics. Track your readership, connect with authors, and explore a world of knowledge.
+- **Github** as online code repository
