@@ -5,6 +5,7 @@ import {genSalt, hash} from "bcryptjs"
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign } from "hono/jwt";
+import { setCookie } from "hono/cookie";
 
 
 // middleware to validate user input
@@ -91,9 +92,20 @@ export async function addUserMiddleware(c: any, next: any) {
 export async function generateTokenMiddleware(c: any, next: any) {
   const body = await c.req.json();
 
-  const token = await sign(body.username, c.env.JWT_secret, c.env.JWT_algorithm);
+  const timestamp = Math.floor(Date.now() + 1000 * 60 * 60 * 24 * 30);
 
-  body.jwt_token = token;
+  const token = await sign({
+    sub: body.username,
+    name: body.first_name,
+    exp: timestamp
+  }, c.env.JWT_secret, c.env.JWT_algorithm);
+
+  setCookie(c, "token", token, {
+    httpOnly: true,
+    path: "/",
+    expires: new Date(timestamp),
+    sameSite: "Lax",
+  });
 
   await next()
 }

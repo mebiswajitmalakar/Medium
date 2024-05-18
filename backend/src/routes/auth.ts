@@ -17,11 +17,9 @@ app.use("/signup", addUserMiddleware)
 app.use("/signup", generateTokenMiddleware)
 
 app.post("/signup", async (c) => {
-  const {jwt_token} = await c.req.json();
 
   return c.json({
     message: "signup successful",
-    token: jwt_token
   }, status.ok)
 })
 
