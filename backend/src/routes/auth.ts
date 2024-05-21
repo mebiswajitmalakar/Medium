@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import status from "../utils/statusCodes";
-import { InputValidationMiddleware, passwordEncryptionMiddleware, addUserMiddleware, generateTokenMiddleware } from "../middlewares/auth";
+import { InputValidationMiddleware, passwordEncryptionMiddleware, addUserMiddleware, generateTokenMiddleware } from "../middlewares/signup";
 
 const app = new Hono<{
   Bindings: {
