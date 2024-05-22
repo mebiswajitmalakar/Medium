@@ -9,7 +9,7 @@ import { setCookie } from "hono/cookie";
 
 
 // middleware to validate user input
-export async function InputValidationMiddleware(c: any, next: any) {
+export async function inputValidationMiddleware(c: any, next: any) {
   const body = await c.req.json();
 
   const signupSchema = z.object({
