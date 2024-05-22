@@ -5,6 +5,7 @@ enum codes {
   internal_error = 500,
   service_unavailable = 503,
   gateway_timeout = 504,
+  unauthorized = 401
 }
 
 export default codes;
